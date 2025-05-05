@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Enigma - Episodes
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Montserrat", sans-serif;
+      background-color: #0f1410;
+      color: #d1d5db;
+    }
+    /* Custom scrollbar hidden for horizontal */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #b91c1c;
+      border-radius: 10px;
+    }
+    
+    /* Episode card hover effect */
+    .episode-card {
+      transition: all 0.3s ease;
+    }
+    
+    .episode-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+ </head>
+ <body class="relative min-h-screen flex flex-col">
+  <!-- Top bar -->
+  <div class="bg-black text-gray-300 text-center text-xs py-1 select-none">
+   
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="w-full bg-black py-4">
+   <div class="flex items-center justify-between max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
+    <div class="flex items-center space-x-2">
+     <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+      <g>
+          <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+          <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+      </g>
+     </svg>
+     <span class="text-white font-semibold text-sm select-none">
+      Enigma
+     </span>
+    </div>
+    <ul class="hidden md:flex text-xs font-semibold">
+     <li>
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="about.html">
+       About
+      </a>
+     </li>
+     <li>
+      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="#">
+       Episodes
+      </a>
+     </li>
+     <li>
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="contact.html">
+       Contact us
+      </a>
+     </li>
+    </ul>
+    <button aria-label="Open menu" class="md:hidden text-white focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+     <i class="fas fa-bars"></i>
+    </button>
+   </div>
+  </nav>
+  
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden bg-black px-6 py-2 space-y-2 text-xs font-semibold text-white" id="mobile-menu">
+   <a class="block hover:text-red-700 px-4 py-1" href="index.html">Home</a>
+   <a class="block hover:text-red-700 px-4 py-1" href="about.html">About</a>
+   <a class="block text-red-700 px-4 py-1" href="#">Episodes</a>
+   <a class="block hover:text-red-700 px-4 py-1" href="contact.html">Contact us</a>
+  </div>
+  
+  <!-- Main content -->
+  <main class="flex-grow max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 py-12">
+   <h1 class="text-white text-3xl font-bold mb-10">Episodes List</h1>
+   
+   <!-- Episodes grid -->
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Episode 1 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Forest with tall tree" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Beneath the old oak tree</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 12</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 2 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Person with anonymous mask" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">The unseen watcher</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 11</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 3 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Cliff by the sea" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">The haunting of raven hill</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 10</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 4 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Person with finger on lips" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Haunted Whispers</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 9</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 5 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Open book with shadow" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Secrets of the shadows</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 8</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 6 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Neon blue hallway" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Mystery Unrevealed</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 7</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 7 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Desk lamp in dark room" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Unsolved Mystery unveiled</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 6</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 8 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Person with hands on face" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1492681290082-e932832941e6?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Paranormal enigmas</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 5</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 9 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Ocean waves at night" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">The unseen realm</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 4</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 10 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Blurry green forest" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1502472584811-0a2f2feb8968?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Echoes of the past</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 3</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 11 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Misty path with arches" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Shrouded truths</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 2</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+    
+    <!-- Episode 12 -->
+    <div class="episode-card bg-black rounded-lg overflow-hidden">
+     <div class="relative">
+      <img alt="Clouds from above" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+     </div>
+     <div class="p-4">
+      <h3 class="text-white text-sm font-semibold mb-1">Mystery echoes</h3>
+      <p class="text-xs text-gray-400 mb-3">Seri 1</p>
+      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
+     </div>
+    </div>
+   </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 text-xs py-8 mt-auto">
+   <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Logo and brand -->
+    <div>
+     <div class="flex items-center space-x-2 mb-4">
+      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+       <g>
+           <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+           <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+       </g>
+      </svg>
+      <span class="text-white font-semibold text-sm select-none">
+       Enigma
+      </span>
+     </div>
+    </div>
+    
+    <!-- Quick links -->
+    <div>
+     <h4 class="text-white font-semibold mb-4">Quick links</h4>
+     <ul class="space-y-2">
+      <li><a href="index.html" class="hover:text-red-700 transition-colors duration-300">Home</a></li>
+      <li><a href="about.html" class="hover:text-red-700 transition-colors duration-300">About</a></li>
+      <li><a href="#" class="text-red-700 transition-colors duration-300">Episodes</a></li>
+      <li><a href="contact.html" class="hover:text-red-700 transition-colors duration-300">Contact us</a></li>
+     </ul>
+    </div>
+    
+    <!-- Contacts -->
+    <div>
+     <h4 class="text-white font-semibold mb-4">Contacts</h4>
+     <p class="mb-2">enigmapodcast@gmail.com</p>
+     <p class="mb-4">0822334468</p>
+     <div class="flex space-x-4">
+      <a href="#" aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" aria-label="Twitter" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" aria-label="YouTube" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-youtube"></i>
+      </a>
+     </div>
+    </div>
+   </div>
+   
+   <!-- Newsletter -->
+   <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 mt-8">
+    <h4 class="text-white font-semibold mb-4">Subscribe to our newsletter</h4>
+    <div class="flex flex-col md:flex-row gap-4 max-w-md">
+     <input type="email" placeholder="Email *" class="bg-black border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-red-700 flex-grow">
+     <button type="submit" class="bg-black border border-gray-700 text-gray-300 px-4 py-2 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300 md:w-auto w-full">Submit</button>
+    </div>
+   </div>
+   
+   <!-- Copyright -->
+   <div class="text-center text-gray-600 text-[10px] mt-8">
+    © 2024 by Mystery Echoes. Made with <span class="text-red-700">♥</span> using Wix Studio™
+   </div>
+  </footer>
+ </body>
+</html>

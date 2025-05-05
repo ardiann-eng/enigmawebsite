@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Enigma - Contact Us
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Montserrat", sans-serif;
+      background-color: #0f1410;
+      color: #d1d5db;
+    }
+    /* Custom scrollbar hidden for horizontal */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #b91c1c;
+      border-radius: 10px;
+    }
+    
+    /* Input focus styles */
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #b91c1c;
+    }
+    
+    /* Button hover effect */
+    .submit-btn:hover {
+      background-color: #b91c1c;
+      color: white;
+    }
+  </style>
+ </head>
+ <body class="relative min-h-screen flex flex-col">
+  <!-- Top bar -->
+  <div class="bg-black text-gray-300 text-center text-xs py-1 select-none">
+   
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="w-full bg-black py-4">
+   <div class="flex items-center justify-between max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
+    <div class="flex items-center space-x-2">
+     <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+      <g>
+          <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+          <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+      </g>
+     </svg>
+     <span class="text-white font-semibold text-sm select-none">
+      Enigma
+     </span>
+    </div>
+    <ul class="hidden md:flex text-xs font-semibold">
+     <li>
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="about.html">
+       About
+      </a>
+     </li>
+     <li>
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="episode.html">
+       Episodes
+      </a>
+     </li>
+     <li>
+      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="#">
+       Contact us
+      </a>
+     </li>
+    </ul>
+    <button aria-label="Open menu" class="md:hidden text-white focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+     <i class="fas fa-bars"></i>
+    </button>
+   </div>
+  </nav>
+  
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden bg-black px-6 py-2 space-y-2 text-xs font-semibold text-white" id="mobile-menu">
+   <a class="block hover:text-red-700 px-4 py-1" href="index.html">Home</a>
+   <a class="block hover:text-red-700 px-4 py-1" href="about.html">About</a>
+   <a class="block hover:text-red-700 px-4 py-1" href="episode.html">Episodes</a>
+   <a class="block text-red-700 px-4 py-1" href="#">Contact us</a>
+  </div>
+  
+  <!-- Main content -->
+  <main class="flex-grow">
+   <!-- Contact header -->
+   <section class="w-full py-12 bg-black">
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
+     <h1 class="text-white text-4xl font-bold mb-4">Get in touch with us</h1>
+     <p class="text-gray-400 text-sm max-w-2xl">
+      We'd love to hear from you! Whether you have feedback, questions, or a mystery to share, feel free to reach out.
+     </p>
+    </div>
+   </section>
+   
+   <!-- Contact form section -->
+   <section class="w-full py-12">
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Left side - Contact form -->
+      <div>
+       <h2 class="text-white text-2xl font-bold mb-6">Send a message</h2>
+       <form class="space-y-6">
+        <div>
+         <label class="block text-sm text-white mb-2" for="name">Name</label>
+         <input class="w-full bg-black border border-gray-700 rounded px-4 py-2 text-white" id="name" placeholder="Sarah Johnson" type="text"/>
+        </div>
+        <div>
+         <label class="block text-sm text-white mb-2" for="email">Email *</label>
+         <input class="w-full bg-black border border-gray-700 rounded px-4 py-2 text-white" id="email" placeholder="abc@gmail.com" required type="email"/>
+        </div>
+        <div>
+         <label class="block text-sm text-white mb-2" for="message">Message *</label>
+         <textarea class="w-full bg-black border border-gray-700 rounded px-4 py-2 text-white resize-none" id="message" placeholder="Enter your message" required rows="5"></textarea>
+        </div>
+        <button class="submit-btn bg-black border border-gray-700 text-white py-2 px-6 rounded transition-colors duration-300" type="submit">
+         Submit
+        </button>
+       </form>
+      </div>
+      
+      <!-- Right side - Contact info -->
+      <div>
+       <h2 class="text-white text-2xl font-bold mb-6">Contact info</h2>
+       <div class="space-y-8">
+        <!-- Location -->
+        <div class="flex items-start space-x-4">
+         <div class="text-red-700 mt-1">
+          <i class="fas fa-map-marker-alt text-xl"></i>
+         </div>
+         <div>
+          <h3 class="text-white font-semibold mb-1">Location</h3>
+          <p class="text-gray-400">Makassar, Indonesia</p>
+         </div>
+        </div>
+        
+        <!-- Phone -->
+        <div class="flex items-start space-x-4">
+         <div class="text-red-700 mt-1">
+          <i class="fas fa-phone-alt text-xl"></i>
+         </div>
+         <div>
+          <h3 class="text-white font-semibold mb-1">Phone number</h3>
+          <p class="text-gray-400">123-456-7890</p>
+         </div>
+        </div>
+        
+        <!-- Email -->
+        <div class="flex items-start space-x-4">
+         <div class="text-red-700 mt-1">
+          <i class="fas fa-envelope text-xl"></i>
+         </div>
+         <div>
+          <h3 class="text-white font-semibold mb-1">Email address</h3>
+          <p class="text-gray-400">ardianskennedy@gmail.com</p>
+         </div>
+        </div>
+        
+        <!-- Social Media -->
+        <div class="mt-12">
+         <h3 class="text-white font-semibold mb-4">Follow us on</h3>
+         <div class="flex space-x-6 text-xl">
+          <a aria-label="Reddit" class="text-gray-400 hover:text-red-700 transition-colors duration-300" href="#">
+           <i class="fab fa-reddit-alien"></i>
+          </a>
+          <a aria-label="Twitter" class="text-gray-400 hover:text-red-700 transition-colors duration-300" href="#">
+           <i class="fab fa-twitter"></i>
+          </a>
+          <a aria-label="Facebook" class="text-gray-400 hover:text-red-700 transition-colors duration-300" href="#">
+           <i class="fab fa-facebook-f"></i>
+          </a>
+          <a aria-label="Instagram" class="text-gray-400 hover:text-red-700 transition-colors duration-300" href="#">
+           <i class="fab fa-instagram"></i>
+          </a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 text-xs py-8 mt-auto">
+   <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Logo and brand -->
+    <div>
+     <div class="flex items-center space-x-2 mb-4">
+      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+       <g>
+           <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+           <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+       </g>
+      </svg>
+      <span class="text-white font-semibold text-sm select-none">
+       Enigma
+      </span>
+     </div>
+    </div>
+    
+    <!-- Quick links -->
+    <div>
+     <h4 class="text-white font-semibold mb-4">Quick links</h4>
+     <ul class="space-y-2">
+      <li><a href="index.html" class="hover:text-red-700 transition-colors duration-300">Home</a></li>
+      <li><a href="about.html" class="hover:text-red-700 transition-colors duration-300">About</a></li>
+      <li><a href="episode.html" class="hover:text-red-700 transition-colors duration-300">Episodes</a></li>
+      <li><a href="#" class="text-red-700 transition-colors duration-300">Contact us</a></li>
+     </ul>
+    </div>
+    
+    <!-- Contacts -->
+    <div>
+     <h4 class="text-white font-semibold mb-4">Contacts</h4>
+     <p class="mb-2">ardianskennedy@gmail.com</p>
+     <p class="mb-4">081122334456</p>
+     <div class="flex space-x-4">
+      <a href="#" aria-label="Reddit" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-reddit-alien"></i>
+      </a>
+      <a href="#" aria-label="Twitter" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300">
+       <i class="fab fa-instagram"></i>
+      </a>
+     </div>
+    </div>
+   </div>
+   
+   <!-- Newsletter -->
+   <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 mt-8">
+    <h4 class="text-white font-semibold mb-4">Subscribe to our newsletter</h4>
+    <div class="flex flex-col md:flex-row gap-4 max-w-md">
+     <input type="email" placeholder="Email *" class="bg-black border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-red-700 flex-grow">
+     <button type="submit" class="bg-black border border-gray-700 text-gray-300 px-4 py-2 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300 md:w-auto w-full">Submit</button>
+    </div>
+   </div>
+   
+   <!-- Copyright -->
+   <div class="text-center text-gray-600 text-[10px] mt-8">
+    © 2024 by Mystery Echoes. Made with <span class="text-red-700">♥</span> using Wix Studio™
+   </div>
+  </footer>
+ </body>
+</html>

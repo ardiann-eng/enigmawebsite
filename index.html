@@ -1,0 +1,489 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Enigma
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Montserrat", sans-serif;
+      background-color: #0a0a0a;
+      color: #d1d5db;
+      cursor: url('https://cdn.custom-cursor.com/db/cursor/32/Scary_Cursor.png'), auto;
+    }
+    /* Custom scrollbar hidden for horizontal */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #b91c1c;
+      border-radius: 10px;
+    }
+    
+    /* Vertical text for section labels */
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(180deg);
+      height: auto;
+      display: flex;
+      align-items: center;
+      color: #4b5563;
+      font-size: 1.875rem;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(185, 28, 28, 0.5);
+    }
+    
+    /* Episode card hover effect */
+    .episode-card {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(185, 28, 28, 0.2);
+    }
+    
+    .episode-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 15px -3px rgba(185, 28, 28, 0.4);
+    }
+    
+    /* Review card tilt effect */
+    .review-card {
+      transition: all 0.3s ease;
+      transform: perspective(1000px) rotateX(5deg);
+      box-shadow: 0 4px 8px rgba(185, 28, 28, 0.2);
+    }
+    
+    .review-card:hover {
+      transform: perspective(1000px) rotateX(0);
+      box-shadow: 0 10px 15px -3px rgba(185, 28, 28, 0.4);
+    }
+    
+    /* Horror effects */
+    .horror-text {
+      text-shadow: 0 0 8px rgba(185, 28, 28, 0.7);
+    }
+    
+    .flicker-animation {
+      animation: flicker 4s linear infinite;
+    }
+    
+    @keyframes flicker {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 1;
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.6;
+      }
+    }
+    
+    .blood-drip {
+      position: relative;
+    }
+    
+    .blood-drip::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 15px;
+      background: linear-gradient(to bottom, #b91c1c, transparent);
+      animation: drip 5s ease-in-out infinite;
+    }
+    
+    @keyframes drip {
+      0%, 100% {
+        height: 0;
+        opacity: 0;
+      }
+      50% {
+        height: 15px;
+        opacity: 1;
+      }
+    }
+    
+    .fog-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/fog.png');
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+ </head>
+ <body class="relative min-h-screen flex flex-col">
+  <!-- Top bar -->
+  <div class="bg-black text-gray-300 text-center text-xs py-1 select-none">
+   
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="w-full bg-black py-2">
+   <div class="flex items-center justify-between max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
+    <div class="flex items-center space-x-2">
+     <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+      <g>
+          <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+          <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+      </g>
+     </svg>
+     <span class="text-white font-semibold text-sm select-none">
+      Enigma
+     </span>
+    </div>
+    <ul class="hidden md:flex text-xs font-semibold items-center h-full">
+     <li class="inline-block">
+      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="#">
+       Home
+      </a>
+     </li>
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="about.html">
+       About
+      </a>
+     </li>
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="episode.html">
+       Episodes
+      </a>
+     </li>
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="contact.html">
+       Contact us
+      </a>
+     </li>
+    </ul>
+    <button aria-label="Open menu" class="md:hidden text-white focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+     <i class="fas fa-bars"></i>
+    </button>
+   </div>
+  </nav>
+  
+  <!-- Mobile menu -->
+  <div class="md:hidden hidden bg-black px-6 py-1 space-y-1 text-xs font-semibold text-white" id="mobile-menu">
+   <a class="block text-red-700 px-4 py-1 flex items-center" href="#">Home</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="about.html">About</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="episode.html">Episodes</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="contact.html">Contact us</a>
+  </div>
+  
+  <!-- Main content -->
+  <main class="flex-grow">
+   <!-- Fog overlay for entire page -->
+   <div class="fog-overlay"></div>
+   
+   <!-- Hero center -->
+   <section class="w-full h-[500px] relative flex flex-col items-center justify-center text-center mt-7 mb-16 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');">
+    <!-- SVG Circle behind content -->
+    <svg preserveAspectRatio="xMidYMid meet" data-bbox="10 10 180 180" viewBox="10 10 180 180" height="240" width="240" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-label="" class="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-90">
+        <g>
+            <path d="M180 100c0 44.183-35.817 80-80 80s-80-35.817-80-80 35.817-80 80-80 80 35.817 80 80z" fill="none" stroke="white" stroke-width="2" class="flicker-animation"></path>
+        </g>
+    </svg>
+    <!-- Main content -->
+    <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label="" class="relative z-10 mb-2 flicker-animation">
+    <defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+    <g>
+        <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+        <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+    </g>
+    </svg>
+    <h1 class="text-white font-semibold text-2xl mb-1 select-none relative z-10 horror-text blood-drip">
+     ENIGMA
+    </h1>
+    <p class="text-gray-400 text-xs select-none relative z-10 italic">
+     Whispers of the unsolved
+    </p>
+    <!-- Follow Us section below circle, moved further down -->
+    <div class="mt-32 text-gray-400 text-xs select-none relative z-10 flex flex-col items-center space-y-2">
+     <span class="font-semibold text-white">
+      Follow Us On
+     </span>
+     <div class="flex text-lg">
+      <a aria-label="Instagram" class="mx-2 hover:text-red-700 transition-colors duration-300" href="#">
+       <i class="fab fa-instagram"></i>
+      </a>
+      <a aria-label="Facebook" class="mx-2 hover:text-red-700 transition-colors duration-300" href="#">
+       <i class="fab fa-facebook-f"></i>
+      </a>
+      <a aria-label="Twitter" class="mx-2 hover:text-red-700 transition-colors duration-300" href="#">
+       <i class="fab fa-twitter"></i>
+      </a>
+      <a aria-label="YouTube" class="mx-2 hover:text-red-700 transition-colors duration-300" href="#">
+       <i class="fab fa-youtube"></i>
+      </a>
+     </div>
+    </div>
+   </section>
+   
+   <!-- About us section -->
+   <section class="relative py-16 px-6 md:px-12 lg:px-20">
+    <div class="vertical-text left-4 md:left-8 horror-text">About Us</div>
+    <div class="ml-16 md:ml-24 grid grid-cols-1 md:grid-cols-2 gap-10">
+     <div class="text-xs text-white leading-relaxed max-w-xl">
+      <h2 class="text-white font-semibold text-lg mb-4 horror-text">About us</h2>
+      <p class="mb-3">
+       Selamat datang di <span class="text-red-700 font-semibold">Enigma</span>, tempat di mana misteri, intrik, dan ketegangan bersatu untuk menciptakan pengalaman yang tak terlupakan. Di Enigma, kami bersemangat untuk menghadirkan cerita-cerita mencekam yang membuat Anda tetap terjaga di malam hari.
+      </p>
+      <p class="mb-3">
+       Perjalanan kami dimulai dengan ide sederhana: menciptakan dunia imersif yang dipenuhi dengan ketegangan, bahaya, dan teka-teki kompleks. Melalui novel, storytelling interaktif, atau pengalaman misterius, misi kami adalah membawa Anda ke dalam kisah yang tak terduga dan mendebarkan seperti misteri yang mereka sembunyikan.
+      </p>
+     </div>
+     <div class="flex justify-center md:justify-end">
+      <div class="w-60 h-60 relative">
+       <div class="absolute inset-0 bg-red-600 rounded-full transform translate-x-2 translate-y-2"></div>
+       <img alt="Ghost cartoon character" class="w-60 h-60 object-cover rounded-full relative z-10 grayscale hover:grayscale-0 transition-all duration-500" src="https://storage.googleapis.com/a1aa/image/275128ce-56c1-42fe-47f9-909d95cdc4ec.jpg"/>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- Latest Episodes section -->
+   <section class="relative py-16 px-6 md:px-12 lg:px-20">
+    <div class="vertical-text left-4 md:left-8 horror-text">Episodes</div>
+    <div class="ml-16 md:ml-24">
+     <div class="flex justify-between items-center mb-6">
+      <h2 class="text-white font-semibold text-lg horror-text">Latest Episodes</h2>
+      <a href="episode.html" class="text-xs text-gray-400 hover:text-red-700 transition-colors duration-300">View all episodes</a>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Episode 1 -->
+      <div class="episode-card bg-black rounded-lg overflow-hidden">
+       <div class="relative">
+        <img alt="Dark forest at night" class="w-full h-40 object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+       </div>
+       <div class="p-4 border-l-4 border-red-700">
+        <h3 class="text-white text-sm font-semibold mb-1">Whispers in the Dark</h3>
+        <div class="flex justify-between text-xs text-gray-400">
+         <span>Episode 5</span>
+         <span>33:47 min</span>
+        </div>
+       </div>
+      </div>
+      
+      <!-- Episode 2 -->
+      <div class="episode-card bg-black rounded-lg overflow-hidden">
+       <div class="relative">
+        <img alt="Silhouette of a person standing in fog" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+       </div>
+       <div class="p-4 border-l-4 border-red-700">
+        <h3 class="text-white text-sm font-semibold mb-1">The Silent Witness</h3>
+        <div class="flex justify-between text-xs text-gray-400">
+         <span>Episode 6</span>
+         <span>42:47 min</span>
+        </div>
+       </div>
+      </div>
+      
+      <!-- Episode 3 -->
+      <div class="episode-card bg-black rounded-lg overflow-hidden">
+       <div class="relative">
+        <img alt="Abandoned trail in a forest" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+       </div>
+       <div class="p-4 border-l-4 border-red-700">
+        <h3 class="text-white text-sm font-semibold mb-1">A Trail of Shadows</h3>
+        <div class="flex justify-between text-xs text-gray-400">
+         <span>Episode 7</span>
+         <span>38:47 min</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- Reviews section -->
+   <section class="relative py-16 px-6 md:px-12 lg:px-20">
+    <div class="vertical-text left-4 md:left-8">Reviews</div>
+    <div class="ml-16 md:ml-24">
+     <h2 class="text-white font-semibold text-lg mb-6">What our listeners say</h2>
+     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 items-stretch">
+      <div class="review-card bg-black border-2 border-red-700 rounded-md p-6 text-xs text-white break-words whitespace-normal max-w-xs">
+       <div class="flex items-center mb-4">
+        <img alt="User 1 avatar image" class="w-10 h-10 rounded-full mr-3 object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"/>
+        <h4 class="font-semibold">Sarah Johnson</h4>
+       </div>
+       <p class="leading-relaxed">
+        I'm absolutely hooked on this podcast! The storytelling is masterful, and the mysteries keep me on the edge of my seat.
+       </p>
+       <div class="flex mt-4">
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+       </div>
+      </div>
+      <div class="review-card bg-black border-2 border-red-700 rounded-md p-6 text-xs text-white break-words whitespace-normal max-w-xs">
+       <div class="flex items-center mb-4">
+        <img alt="User 2 avatar image" class="w-10 h-10 rounded-full mr-3 object-cover" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
+        <h4 class="font-semibold">Jeffrey Lightwood</h4>
+       </div>
+       <p class="leading-relaxed">
+        A captivating podcast with well-told gripping stories, keeping me intrigued throughout.
+       </p>
+       <div class="flex mt-4">
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star-half-alt text-red-700"></i>
+       </div>
+      </div>
+      <div class="review-card bg-black border-2 border-red-700 rounded-md p-6 text-xs text-white break-words whitespace-normal max-w-xs">
+       <div class="flex items-center mb-4">
+        <img alt="User 3 avatar image" class="w-10 h-10 rounded-full mr-3 object-cover" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+        <h4 class="font-semibold">Alana Wilson</h4>
+       </div>
+       <p class="leading-relaxed">
+        Always curious, mysterious and so fascinating. Makes me want to listen again and again.
+       </p>
+       <div class="flex mt-4">
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+        <i class="fas fa-star text-red-700"></i>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- Contact section -->
+   <section class="relative py-16 px-6 md:px-12 lg:px-20">
+    <div class="vertical-text left-4 md:left-8">Contact</div>
+    <div class="ml-16 md:ml-24 flex flex-col md:flex-row md:items-center md:space-x-10 max-w-xl w-full">
+     <div class="w-40 h-40 rounded-full border border-gray-700 flex items-center justify-center mb-8 md:mb-0">
+      <img alt="Scary cartoon ghost icon" class="w-20 h-20" height="80" src="https://png.pngtree.com/png-clipart/20230810/original/pngtree-halloween-ghost-cartoon-scary-expression-sickle-picture-image_8534927.png" width="80"/>
+     </div>
+     <form class="flex flex-col space-y-3 w-full max-w-xs text-xs text-gray-300">
+      <label class="flex flex-col">
+       <span class="mb-1 text-gray-400 select-none">Name</span>
+       <input class="bg-black border border-gray-700 rounded px-2 py-1 text-white focus:outline-none focus:border-red-700" placeholder="Sarah Johnson" type="text"/>
+      </label>
+      <label class="flex flex-col">
+       <span class="mb-1 text-gray-400 select-none">Email</span>
+       <input class="bg-black border border-gray-700 rounded px-2 py-1 text-white focus:outline-none focus:border-red-700" placeholder="abc@gmail.com" type="email"/>
+      </label>
+      <label class="flex flex-col">
+       <span class="mb-1 text-gray-400 select-none">Message*</span>
+       <textarea class="bg-black border border-gray-700 rounded px-2 py-1 text-white focus:outline-none focus:border-red-700 resize-none" placeholder="Enter your message" rows="3"></textarea>
+      </label>
+      <button class="bg-black border border-gray-700 text-gray-300 text-xs py-1 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300" type="submit">
+       Submit
+      </button>
+     </form>
+    </div>
+   </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 text-xs py-8 mt-auto px-4 md:px-0">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:justify-between md:items-start space-y-8 md:space-y-0">
+    <div class="flex flex-col md:flex-row md:space-x-12">
+     <div class="mb-6 md:mb-0 flex items-center space-x-2">
+      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+       <g>
+           <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+           <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+       </g>
+      </svg>
+      <span class="text-white font-semibold text-sm select-none">
+       Enigma
+      </span>
+     </div>
+     <div class="flex space-x-12">
+      <div>
+       <h4 class="font-semibold mb-2 text-white select-none">
+        Quick links
+       </h4>
+       <ul class="space-y-1">
+        <li>
+         <a class="hover:text-red-700 transition-colors duration-300" href="#">
+          Home
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-red-700 transition-colors duration-300" href="about.html">
+          About
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-red-700 transition-colors duration-300" href="episode.html">
+          Episodes
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-red-700 transition-colors duration-300" href="contact.html">
+          Contact us
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-semibold mb-2 text-white select-none">
+        Contacts
+       </h4>
+       <p>
+        enigmapodcast@gmail.com
+       </p>
+       <p>
+        0822334468
+       </p>
+       <div class="flex space-x-4 mt-2 text-lg">
+        <a aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300" href="#">
+         <i class="fab fa-instagram"></i>
+        </a>
+        <a aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300" href="#">
+         <i class="fab fa-facebook-f"></i>
+        </a>
+        <a aria-label="X" class="hover:text-red-700 transition-colors duration-300" href="#">
+         <i class="fab fa-twitter"></i>
+        </a>
+        <a aria-label="YouTube" class="hover:text-red-700 transition-colors duration-300" href="#">
+         <i class="fab fa-youtube"></i>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="w-full max-w-xs">
+     <h4 class="font-semibold mb-2 text-white select-none">
+      Subscribe to our newsletter
+     </h4>
+     <form class="flex flex-col space-y-2">
+      <input class="bg-black border border-gray-700 rounded px-2 py-1 text-white focus:outline-none focus:border-red-700 text-xs" placeholder="Email *" type="email"/>
+      <button class="bg-black border border-gray-700 text-gray-300 text-xs py-1 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300" type="submit">
+       Submit
+      </button>
+     </form>
+    </div>
+   </div>
+   <div class="text-center text-gray-600 text-[10px] mt-8 select-none">
+    © 2024 by Mystery Echoes. Made with
+    <span class="text-red-700">
+     ♥
+    </span>
+    using Studio™
+   </div>
+  </footer>
+ </body>
+</html>
