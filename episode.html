@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title>
-   Enigma - Episodes
+   Enigma - Cerita
   </title>
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='20 32.756 160 134.488'%3E%3Cpath d='M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z' fill='%23D22117'/%3E%3Cpath d='M63.571 32.756v41.847H20V32.756h43.571z' fill='%23D22117'/%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com">
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -26,14 +28,255 @@
       border-radius: 10px;
     }
     
-    /* Episode card hover effect */
-    .episode-card {
+    /* Netflix-style styling */
+    .netflix-container {
+      padding: 0 4%;
+      position: relative;
+      z-index: 5;
+    }
+    
+    .netflix-title {
+      font-size: 1.4vw;
+      color: #e5e5e5;
+      font-weight: 700;
+      margin: 0 0 0.5em 0;
+      text-shadow: 0 0 8px rgba(185, 28, 28, 0.7);
+    }
+    
+    /* Horror effects */
+    .horror-text {
+      text-shadow: 0 0 8px rgba(185, 28, 28, 0.7);
+    }
+    
+    .fog-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/fog.png');
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    /* Novel card styling */
+    .novel-card {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.43, 0.13, 0.23, 0.96);
+      transform-origin: center left;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .novel-card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 10px 20px rgba(185, 28, 28, 0.3);
+    }
+    
+    .novel-thumbnail {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 2/3;
+    }
+    
+    .novel-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+      filter: grayscale(0.7);
+    }
+    
+    .novel-card:hover .novel-thumbnail img {
+      filter: grayscale(0);
+      transform: scale(1.05);
+    }
+    
+    .novel-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 60px 15px 15px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    }
+    
+    .novel-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(185, 28, 28, 0.8);
+      color: white;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+    
+    .novel-book-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 50px;
+      height: 50px;
+      background-color: rgba(185, 28, 28, 0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
       transition: all 0.3s ease;
     }
     
-    .episode-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    .novel-card:hover .novel-book-icon {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .novel-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background-color: #b91c1c;
+    }
+    
+    .line-clamp-1 {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .category-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px rgba(185, 28, 28, 0.7);
+    }
+    
+    .read-btn {
+      display: inline-block;
+      background-color: rgba(185, 28, 28, 0.9);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    
+    .novel-card:hover .read-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .filter-options {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .filter-option {
+      padding: 6px 12px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-option:hover, .filter-option.active {
+      background-color: rgba(185, 28, 28, 0.8);
+    }
+    
+    .search-bar {
+      position: relative;
+      width: 250px;
+    }
+    
+    .search-bar input {
+      width: 100%;
+      padding: 8px 12px 8px 35px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      color: white;
+      font-size: 0.8rem;
+    }
+    
+    .search-bar i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Filter buttons */
+    .filter-btn {
+      background-color: transparent;
+      color: #d1d5db;
+      border: 1px solid #4b5563;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: #b91c1c;
+      border-color: #b91c1c;
+      color: white;
+    }
+    
+    @media (max-width: 1024px) {
+      .netflix-item {
+        width: calc(100% / 4 - 10px);
+      }
+      .netflix-title {
+        font-size: 18px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .netflix-item {
+        width: calc(100% / 3 - 10px);
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .netflix-item {
+        width: calc(100% / 2 - 10px);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .netflix-item {
+        width: calc(100% - 10px);
+      }
     }
   </style>
  </head>
@@ -44,7 +287,7 @@
   </div>
   
   <!-- Navigation -->
-  <nav class="w-full bg-black py-4">
+  <nav class="w-full bg-black py-2">
    <div class="flex items-center justify-between max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
     <div class="flex items-center space-x-2">
      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
@@ -57,24 +300,24 @@
       Enigma
      </span>
     </div>
-    <ul class="hidden md:flex text-xs font-semibold">
-     <li>
-      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="index.html">
+    <ul class="hidden md:flex text-xs font-semibold items-center h-full">
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="index.html">
        Home
       </a>
      </li>
-     <li>
-      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="about.html">
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="about.html">
        About
       </a>
      </li>
-     <li>
-      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="#">
-       Episodes
+     <li class="inline-block">
+      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="episode.html">
+       Stories
       </a>
      </li>
-     <li>
-      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="contact.html">
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="contact.html">
        Contact us
       </a>
      </li>
@@ -86,229 +329,552 @@
   </nav>
   
   <!-- Mobile menu -->
-  <div class="md:hidden hidden bg-black px-6 py-2 space-y-2 text-xs font-semibold text-white" id="mobile-menu">
-   <a class="block hover:text-red-700 px-4 py-1" href="index.html">Home</a>
-   <a class="block hover:text-red-700 px-4 py-1" href="about.html">About</a>
-   <a class="block text-red-700 px-4 py-1" href="#">Episodes</a>
-   <a class="block hover:text-red-700 px-4 py-1" href="contact.html">Contact us</a>
+  <div class="md:hidden hidden bg-black px-6 py-1 space-y-1 text-xs font-semibold text-white" id="mobile-menu">
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="index.html">Home</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="about.html">About</a>
+   <a class="block text-red-700 px-4 py-1 flex items-center" href="episode.html">Episodes</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="contact.html">Contact us</a>
   </div>
   
-  <!-- Main content -->
-  <main class="flex-grow max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 py-12">
-   <h1 class="text-white text-3xl font-bold mb-10">Episodes List</h1>
+   <!-- Main content -->
+   <main class="flex-grow">
+    <!-- Fog overlay for entire page -->
+    <div class="fog-overlay"></div>
+    
+    <div class="netflix-container py-12">
+     <div class="filter-bar">
+       <h1 class="text-white text-3xl font-bold horror-text">Novel Horror</h1>
+       
+       <div class="filter-options">
+         <div class="filter-option active">Semua</div>
+         <div class="filter-option">Terbaru</div>
+         <div class="filter-option">Populer</div>
+         <div class="filter-option">Selesai</div>
+       </div>
+       
+       <div class="search-bar">
+         <i class="fas fa-search"></i>
+         <input type="text" placeholder="Cari novel...">
+       </div>
+     </div>
+       <!-- Category: Lanjutkan Membaca -->
+<div class="mb-12">
+  <h2 class="category-title">Lanjutkan Membaca</h2>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <!-- Novel yang sedang dibaca 1 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Haunted house" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
+        <div class="novel-badge">75% SELESAI</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 75%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Bisikan dalam Kegelapan</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Suara-suara aneh yang terdengar di hutan pada malam hari. Apakah itu hanya angin, atau sesuatu yang lebih mengerikan?</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Bab 5</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 15 menit</span>
+        </div>
+        <a href="#" class="read-btn">Lanjutkan Membaca</a>
+      </div>
+    </div>
+    
+    <!-- Novel yang sedang dibaca 2 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Dark forest" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
+        <div class="novel-badge">25% SELESAI</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 25%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Saksi Bisu</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Seorang saksi yang tidak pernah bericara, namun melihat segalanya. Apa yang terjadi ketika rahasia terungkap?</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Bab 6</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 20 menit</span>
+        </div>
+        <a href="#" class="read-btn">Lanjutkan Membaca</a>
+      </div>
+    </div>
+    
+    <!-- Novel yang sedang dibaca 3 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Abandoned trail" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+        <div class="novel-badge">45% SELESAI</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 45%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Jejak Bayangan</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Jejak bayangan yang misterius di hutan terpencil membawa sekelompok pendaki ke dalam petualangan mengerikan.</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Bab 7</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 18 menit</span>
+        </div>
+        <a href="#" class="read-btn">Lanjutkan Membaca</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+   </section>
+  <!-- Category: Berdasarkan Kategori -->
+<div class="mb-12">
+  <h2 class="category-title">Berdasarkan Kategori</h2>
+  
+  <div class="flex space-x-4 mb-6 overflow-x-auto pb-2">
+    <button class="filter-btn active">Semua</button>
+    <button class="filter-btn">Hantu</button>
+    <button class="filter-btn">Psikologis</button>
+    <button class="filter-btn">Misteri</button>
+    <button class="filter-btn">Supranatural</button>
+    <button class="filter-btn">Urban Legend</button>
+    <button class="filter-btn">Thriller</button>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <!-- Novel Kategori 1 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Abandoned house" src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+        <div class="novel-badge">HANTU</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 0%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Rumah Angker Jalan Kemboja</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Rumah tua yang dihantui oleh arwah penasaran dari masa lalu.</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 7</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 25 menit</span>
+        </div>
+        <a href="#" class="read-btn">Baca Sekarang</a>
+      </div>
+    </div>
+    
+    <!-- Novel Kategori 2 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Foggy road" src="https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+        <div class="novel-badge">PSIKOLOGIS</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 0%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Pikiran yang Terpecah</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Ketika pikiranmu menjadi musuh terbesarmu, dan kenyataan mulai kabur.</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 6</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 18 menit</span>
+        </div>
+        <a href="#" class="read-btn">Baca Sekarang</a>
+      </div>
+    </div>
+    
+    <!-- Novel Kategori 3 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Abandoned trail" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+        <div class="novel-badge">MISTERI</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 0%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Kasus Hilangnya Desa Sukamaju</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Sebuah desa terpencil yang menghilang dalam semalam tanpa jejak.</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 5</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 22 menit</span>
+        </div>
+        <a href="#" class="read-btn">Baca Sekarang</a>
+      </div>
+    </div>
+    
+    <!-- Novel Kategori 4 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Person with finger on lips" src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+        <div class="novel-badge">SUPRANATURAL</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 0%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Kekuatan Terlarang</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Kemampuan yang tidak seharusnya dimiliki manusia, membawa malapetaka bagi pemiliknya.</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 4</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 20 menit</span>
+        </div>
+        <a href="#" class="read-btn">Baca Sekarang</a>
+      </div>
+    </div>
+    
+    <!-- Novel Kategori 5 -->
+    <div class="novel-card bg-black">
+      <div class="novel-thumbnail">
+        <img alt="Open book with shadow" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
+        <div class="novel-badge">URBAN LEGEND</div>
+        <div class="novel-book-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="novel-progress" style="width: 0%"></div>
+      </div>
+      <div class="novel-info">
+        <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Legenda Kuntilanak Mall</h3>
+        <p class="text-xs text-gray-400 mb-2 line-clamp-2">Kisah urban tentang hantu wanita yang menghantui mall di tengah kota.</p>
+        <div class="flex justify-between text-xs text-gray-500 mb-2">
+          <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 3</span>
+          <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 15 menit</span>
+        </div>
+        <a href="#" class="read-btn">Baca Sekarang</a>
+      </div>
+    </div>
+  </div>
+</div>
+     
+     <!-- Category: Populer Minggu Ini -->
+     <div class="mb-12">
+       <h2 class="category-title">Populer Minggu Ini</h2>
+       
+       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+         <!-- Novel 6 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Neon blue hallway" src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+             <div class="novel-badge">POPULER</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 75%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Mystery Unrevealed</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Misteri yang belum terpecahkan selama bertahun-tahun akhirnya menemukan jawabannya.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 7</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 30 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 7 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Creepy doll" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
+             <div class="novel-badge">POPULER</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Boneka Terkutuk</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Boneka antik yang membawa kutukan bagi siapa pun yang memilikinya.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 25 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 8 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Abandoned house" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
+             <div class="novel-badge">POPULER</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Rumah di Ujung Jalan</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Rumah tua di ujung jalan yang selalu dihindari oleh penduduk setempat.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 20 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 9 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Abandoned trail" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+             <div class="novel-badge">POPULER</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Hutan Terlarang</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Hutan yang dihindari penduduk lokal karena suara-suara aneh dan penampakan yang mengerikan.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 22 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 10 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Person with finger on lips" src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+             <div class="novel-badge">POPULER</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Rahasia Terpendam</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Rahasia keluarga yang terkubur selama bertahun-tahun akhirnya terungkap dengan cara yang mengerikan.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 18 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+       </div>
+     </div>
+     
+     <!-- Category: Baru Ditambahkan -->
+     <div class="mb-12">
+       <h2 class="category-title">Baru Ditambahkan</h2>
+       
+       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+         <!-- Novel 11 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Open book with shadow" src="https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+             <div class="novel-badge">BARU</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Buku Terlarang</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Buku kuno yang berisi mantra-mantra terlarang yang tidak seharusnya dibaca.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 15 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 12 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Neon blue hallway" src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+             <div class="novel-badge">BARU</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Lorong Waktu</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Lorong misterius yang menghubungkan masa kini dengan masa lalu.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 20 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 13 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Creepy doll" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
+             <div class="novel-badge">BARU</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Panggilan Tengah Malam</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Telepon misterius di tengah malam yang mengubah hidup seorang wanita selamanya.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 25 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 14 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Abandoned house" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
+             <div class="novel-badge">BARU</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Pintu Terlarang</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Pintu yang tidak boleh dibuka, menyimpan rahasia yang mengerikan di baliknya.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 22 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+         
+         <!-- Novel 15 -->
+         <div class="novel-card bg-black">
+           <div class="novel-thumbnail">
+             <img alt="Abandoned trail" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
+             <div class="novel-badge">BARU</div>
+             <div class="novel-book-icon">
+               <i class="fas fa-book-open"></i>
+             </div>
+             <div class="novel-progress" style="width: 0%"></div>
+           </div>
+           <div class="novel-info">
+             <h3 class="text-white text-sm font-semibold mb-1 line-clamp-1">Artefak Terkutuk</h3>
+             <p class="text-xs text-gray-400 mb-2 line-clamp-2">Artefak kuno yang membawa kutukan bagi siapa pun yang memilikinya.</p>
+             <div class="flex justify-between text-xs text-gray-500 mb-2">
+               <span class="flex items-center"><i class="fas fa-book mr-1"></i> Seri 1</span>
+               <span class="flex items-center"><i class="fas fa-clock mr-1"></i> 18 menit</span>
+             </div>
+             <a href="#" class="read-btn">Baca Sekarang</a>
+           </div>
+         </div>
+       </div>
+     </div>
+     
+     <!-- Pagination -->
+     <div class="flex justify-center mt-12">
+       <div class="flex space-x-2">
+         <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 text-white hover:bg-red-700 transition-colors duration-300">1</a>
+         <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-red-700 hover:text-white transition-colors duration-300">2</a>
+         <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-red-700 hover:text-white transition-colors duration-300">3</a>
+         <span class="w-10 h-10 flex items-center justify-center text-gray-400">...</span>
+         <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-red-700 hover:text-white transition-colors duration-300">10</a>
+       </div>
+     </div>
+    </div>
+   </main>
    
-   <!-- Episodes grid -->
-   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <!-- Episode 1 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Forest with tall tree" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Beneath the old oak tree</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 12</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 2 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Person with anonymous mask" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">The unseen watcher</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 11</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 3 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Cliff by the sea" class="w-full h-40 object-cover" src="https://storage.googleapis.com/a1aa/image/6d3c0817-df81-4ae6-64cd-05e02eef7992.jpg"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">The haunting of raven hill</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 10</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 4 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Person with finger on lips" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Haunted Whispers</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 9</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 5 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Open book with shadow" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Secrets of the shadows</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 8</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 6 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Neon blue hallway" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Mystery Unrevealed</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 7</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 7 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Desk lamp in dark room" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Unsolved Mystery unveiled</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 6</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 8 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Person with hands on face" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1492681290082-e932832941e6?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Paranormal enigmas</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 5</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 9 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Ocean waves at night" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">The unseen realm</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 4</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 10 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Blurry green forest" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1502472584811-0a2f2feb8968?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Echoes of the past</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 3</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 11 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Misty path with arches" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Shrouded truths</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 2</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-    
-    <!-- Episode 12 -->
-    <div class="episode-card bg-black rounded-lg overflow-hidden">
-     <div class="relative">
-      <img alt="Clouds from above" class="w-full h-40 object-cover" src="https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-     </div>
-     <div class="p-4">
-      <h3 class="text-white text-sm font-semibold mb-1">Mystery echoes</h3>
-      <p class="text-xs text-gray-400 mb-3">Seri 1</p>
-      <a href="#" class="inline-block text-xs text-red-700 border border-red-700 px-3 py-1 rounded hover:bg-red-700 hover:text-white transition-colors duration-300">Start Now</a>
-     </div>
-    </div>
-   </div>
-  </main>
   
   <!-- Footer -->
   <footer class="bg-black text-gray-400 text-xs py-8 mt-auto">
-   <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <!-- Logo and brand -->
-    <div>
-     <div class="flex items-center space-x-2 mb-4">
-      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
-       <g>
-           <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
-           <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
-       </g>
-      </svg>
-      <span class="text-white font-semibold text-sm select-none">
-       Enigma
-      </span>
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+     <!-- Logo and brand -->
+     <div>
+      <div class="flex items-center space-x-2 mb-4">
+       <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+        <g>
+            <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+            <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+        </g>
+       </svg>
+       <span class="text-white font-semibold text-sm select-none">
+        Enigma
+       </span>
+      </div>
+     </div>
+     
+     <!-- Quick links -->
+     <div>
+      <h4 class="text-white font-semibold mb-4">Quick links</h4>
+      <ul class="space-y-2">
+       <li><a href="index.html" class="hover:text-red-700 transition-colors duration-300">Home</a></li>
+       <li><a href="about.html" class="hover:text-red-700 transition-colors duration-300">About</a></li>
+       <li><a href="episode.html" class="hover:text-red-700 transition-colors duration-300">Episodes</a></li>
+       <li><a href="#" class="text-red-700 transition-colors duration-300">Contact us</a></li>
+      </ul>
+     </div>
+     
+     <!-- Contacts -->
+     <div>
+      <h4 class="text-white font-semibold mb-4">Contacts</h4>
+      <p class="mb-2">ardianskennedy@gmail.com</p>
+      <p class="mb-4">081122334456</p>
+      <div class="flex space-x-4">
+       <a href="#" aria-label="Reddit" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-reddit-alien"></i>
+       </a>
+       <a href="#" aria-label="Twitter" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-twitter"></i>
+       </a>
+       <a href="#" aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-facebook-f"></i>
+       </a>
+       <a href="#" aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-instagram"></i>
+       </a>
+      </div>
      </div>
     </div>
     
-    <!-- Quick links -->
-    <div>
-     <h4 class="text-white font-semibold mb-4">Quick links</h4>
-     <ul class="space-y-2">
-      <li><a href="index.html" class="hover:text-red-700 transition-colors duration-300">Home</a></li>
-      <li><a href="about.html" class="hover:text-red-700 transition-colors duration-300">About</a></li>
-      <li><a href="#" class="text-red-700 transition-colors duration-300">Episodes</a></li>
-      <li><a href="contact.html" class="hover:text-red-700 transition-colors duration-300">Contact us</a></li>
-     </ul>
-    </div>
-    
-    <!-- Contacts -->
-    <div>
-     <h4 class="text-white font-semibold mb-4">Contacts</h4>
-     <p class="mb-2">enigmapodcast@gmail.com</p>
-     <p class="mb-4">0822334468</p>
-     <div class="flex space-x-4">
-      <a href="#" aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300">
-       <i class="fab fa-instagram"></i>
-      </a>
-      <a href="#" aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300">
-       <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="#" aria-label="Twitter" class="hover:text-red-700 transition-colors duration-300">
-       <i class="fab fa-twitter"></i>
-      </a>
-      <a href="#" aria-label="YouTube" class="hover:text-red-700 transition-colors duration-300">
-       <i class="fab fa-youtube"></i>
-      </a>
+    <!-- Newsletter -->
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 mt-8">
+     <h4 class="text-white font-semibold mb-4">Subscribe to our newsletter</h4>
+     <div class="flex flex-col md:flex-row gap-4 max-w-md">
+      <input type="email" placeholder="Email *" class="bg-black border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-red-700 flex-grow">
+      <button type="submit" class="bg-black border border-gray-700 text-gray-300 px-4 py-2 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300 md:w-auto w-full">Submit</button>
      </div>
     </div>
-   </div>
-   
-   <!-- Newsletter -->
-   <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 mt-8">
-    <h4 class="text-white font-semibold mb-4">Subscribe to our newsletter</h4>
-    <div class="flex flex-col md:flex-row gap-4 max-w-md">
-     <input type="email" placeholder="Email *" class="bg-black border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-red-700 flex-grow">
-     <button type="submit" class="bg-black border border-gray-700 text-gray-300 px-4 py-2 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300 md:w-auto w-full">Submit</button>
+    
+    <!-- Copyright -->
+    <div class="text-center text-gray-600 text-[10px] mt-8">
+     © 2024 by Mystery Echoes. Made with <span class="text-red-700">♥</span> using Wix Studio™
     </div>
-   </div>
+   </footer>
+  </body>
+ </html>
    
-   <!-- Copyright -->
-   <div class="text-center text-gray-600 text-[10px] mt-8">
-    © 2024 by Mystery Echoes. Made with <span class="text-red-700">♥</span> using Wix Studio™
-   </div>
-  </footer>
+   <script>
+    // Script untuk filter button
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+      });
+    });
+    
+    // Script untuk filter options
+    const filterOptions = document.querySelectorAll('.filter-option');
+    filterOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        filterOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+      });
+    });
+   </script>
  </body>
 </html>
+      
