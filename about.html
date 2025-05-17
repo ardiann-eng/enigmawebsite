@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title>
-   Enigma - About Us
+   Enigma - Tentang
   </title>
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='20 32.756 160 134.488'%3E%3Cpath d='M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z' fill='%23D22117'/%3E%3Cpath d='M63.571 32.756v41.847H20V32.756h43.571z' fill='%23D22117'/%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com">
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
-  <style>
+    <style>
    body {
       font-family: "Montserrat", sans-serif;
-      background-color: #0f1410;
+      background-color: #0a0a0a;
       color: #d1d5db;
+      cursor: url('https://cdn.custom-cursor.com/db/cursor/32/Scary_Cursor.png'), auto;
     }
     /* Custom scrollbar hidden for horizontal */
     ::-webkit-scrollbar {
@@ -26,44 +29,338 @@
       border-radius: 10px;
     }
     
-    /* Quote styling */
-    .quote {
+    /* Horror effects */
+    .horror-text {
+      text-shadow: 0 0 8px rgba(185, 28, 28, 0.7);
+    }
+    
+    .flicker-animation {
+      animation: flicker 4s linear infinite;
+    }
+    
+    @keyframes flicker {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 1;
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.6;
+      }
+    }
+    
+    .blood-drip {
       position: relative;
-      padding-left: 2rem;
     }
     
-    .quote::before {
-      content: """;
-      font-size: 4rem;
-      color: #b91c1c;
+    .blood-drip::after {
+      content: '';
       position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 15px;
+      background: linear-gradient(to bottom, #b91c1c, transparent);
+      animation: drip 5s ease-in-out infinite;
+    }
+    
+    @keyframes drip {
+      0%, 100% {
+        height: 0;
+        opacity: 0;
+      }
+      50% {
+        height: 15px;
+        opacity: 1;
+      }
+    }
+    
+    .fog-overlay {
+      position: absolute;
+      top: 0;
       left: 0;
-      top: -1.5rem;
-      line-height: 1;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/fog.png');
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1;
     }
     
-    /* Section styling */
-    .section-container {
-      max-width: 1024px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
+    /* Netflix-style styling */
+    .netflix-container {
+      padding: 0 4%;
+      position: relative;
+      z-index: 5;
     }
     
-    /* Image styling */
-    .image-container {
+    .netflix-title {
+      font-size: 1.4vw;
+      color: #e5e5e5;
+      font-weight: 700;
+      margin: 0 0 0.5em 0;
+      text-shadow: 0 0 8px rgba(185, 28, 28, 0.7);
+    }
+    
+    /* Team member card styling */
+    .team-card {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.43, 0.13, 0.23, 0.96);
+      transform-origin: center;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .team-card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 10px 20px rgba(185, 28, 28, 0.3);
+    }
+    
+    .team-thumbnail {
       position: relative;
       overflow: hidden;
-      border-radius: 0.5rem;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      aspect-ratio: 1/1;
     }
     
-    /* Transition effects */
-    .hover-effect {
+    .team-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+      filter: grayscale(0.7);
+    }
+    
+    .team-card:hover .team-thumbnail img {
+      filter: grayscale(0);
+    }
+    
+    .team-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 60px 15px 15px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      transform: translateY(70%);
+      transition: transform 0.3s ease;
+    }
+    
+    .team-card:hover .team-info {
+      transform: translateY(0);
+    }
+    
+    .team-role {
+      display: inline-block;
+      background-color: rgba(185, 28, 28, 0.8);
+      color: white;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 2px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    /* Timeline styling */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background-color: #b91c1c;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -1px;
+    }
+    
+    .timeline-container {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+    
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: #0a0a0a;
+      border: 4px solid #b91c1c;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    .left {
+      left: 0;
+    }
+    
+    .right {
+      left: 50%;
+    }
+    
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid #1f2937;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent #1f2937;
+    }
+    
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid #1f2937;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent #1f2937 transparent transparent;
+    }
+    
+    .right::after {
+      left: -10px;
+    }
+    
+    .timeline-content {
+      padding: 20px 30px;
+      background-color: #1f2937;
+      position: relative;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       transition: all 0.3s ease;
     }
     
-    .hover-effect:hover {
+    .timeline-content:hover {
       transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(185, 28, 28, 0.3);
+    }
+    
+    .timeline-year {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background-color: #b91c1c;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+    
+    /* Stats counter */
+    .stats-counter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #1f2937;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+    
+    .stats-counter:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(185, 28, 28, 0.3);
+    }
+    
+    .counter-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #b91c1c;
+      margin-bottom: 5px;
+    }
+    
+    .counter-label {
+      font-size: 0.9rem;
+      color: #d1d5db;
+      text-align: center;
+    }
+    
+    /* Testimonial card */
+    .testimonial-card {
+      background-color: #1f2937;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      transform: perspective(1000px) rotateX(5deg);
+    }
+    
+    .testimonial-card:hover {
+      transform: perspective(1000px) rotateX(0);
+      box-shadow: 0 10px 15px rgba(185, 28, 28, 0.3);
+    }
+    
+    .testimonial-quote {
+      position: relative;
+      padding-left: 20px;
+      border-left: 3px solid #b91c1c;
+      font-style: italic;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+    }
+    
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+    
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-container::before {
+        left: 60px;
+        border: medium solid #1f2937;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #1f2937 transparent transparent;
+      }
+      
+      .left::after, .right::after {
+        left: 21px;
+      }
+      
+      .right {
+        left: 0%;
+      }
     }
   </style>
  </head>
@@ -74,7 +371,7 @@
   </div>
   
   <!-- Navigation -->
-  <nav class="w-full bg-black py-4">
+  <nav class="w-full bg-black py-2">
    <div class="flex items-center justify-between max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
     <div class="flex items-center space-x-2">
      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
@@ -87,24 +384,24 @@
       Enigma
      </span>
     </div>
-    <ul class="hidden md:flex text-xs font-semibold">
-     <li>
-      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="index.html">
+    <ul class="hidden md:flex text-xs font-semibold items-center h-full">
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="index.html">
        Home
       </a>
      </li>
-     <li>
-      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="#">
+     <li class="inline-block">
+      <a class="text-red-700 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="about.html">
        About
       </a>
      </li>
-     <li>
-      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="episode.html">
-       Episodes
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="episode.html">
+       Stories
       </a>
      </li>
-     <li>
-      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 block" href="contact.html">
+     <li class="inline-block">
+      <a class="text-gray-400 px-4 py-1 hover:text-red-700 transition-colors duration-300 flex items-center h-full" href="contact.html">
        Contact us
       </a>
      </li>
@@ -116,206 +413,388 @@
   </nav>
   
   <!-- Mobile menu -->
-  <div class="md:hidden hidden bg-black px-6 py-2 space-y-2 text-xs font-semibold text-white" id="mobile-menu">
-   <a class="block hover:text-red-700 px-4 py-1" href="index.html">Home</a>
-   <a class="block text-red-700 px-4 py-1" href="#">About</a>
-   <a class="block hover:text-red-700 px-4 py-1" href="episode.html">Episodes</a>
-   <a class="block hover:text-red-700 px-4 py-1" href="contact.html">Contact us</a>
+  <div class="md:hidden hidden bg-black px-6 py-1 space-y-1 text-xs font-semibold text-white" id="mobile-menu">
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="index.html">Home</a>
+   <a class="block text-red-700 px-4 py-1 flex items-center" href="about.html">About</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="episode.html">Episodes</a>
+   <a class="block hover:text-red-700 px-4 py-1 flex items-center" href="contact.html">Contact us</a>
   </div>
   
   <!-- Main content -->
   <main class="flex-grow">
-   <!-- About us header -->
-   <section class="w-full py-12 bg-black">
+   <!-- Fog overlay for entire page -->
+   <div class="fog-overlay"></div>
+   
+   <!-- Hero section -->
+   <section class="relative py-20 bg-gradient-to-b from-black to-gray-900">
     <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
-     <h1 class="text-white text-2xl font-bold mb-4">About us</h1>
-     <p class="text-gray-400 text-sm max-w-2xl leading-relaxed">
-      Welcome to Enigma, where mystery, intrigue, and thrill come together to create unforgettable experiences. At Enigma, we are passionate about crafting captivating stories that keep you on the edge of your seat, challenging your mind, and stirring your curiosity.
-     </p>
+     <div class="text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 horror-text flicker-animation">Tentang Enigma</h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">Platform novel horror terbaik yang akan membawa Anda ke dalam dunia ketakutan yang belum pernah Anda rasakan sebelumnya.</p>
+     </div>
     </div>
    </section>
    
-   <!-- Our journey section -->
-   <section class="w-full py-12">
-    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+   <!-- Our Story section -->
+   <section class="py-16 netflix-container">
+    <div class="max-w-screen-lg mx-auto">
+     <h2 class="text-3xl font-bold text-white mb-8 horror-text">Cerita Kami</h2>
+     
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div>
-       <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-        Our journey began with a simple idea: to create immersive worlds filled with suspense, danger, and complex puzzles. Whether through novels, interactive storytelling, or enigmatic experiences, our mission is to bring you tales that are as unpredictable and thrilling as the mysteries they hold.
-       </p>
+       <p class="text-gray-300 mb-4">Enigma didirikan pada tahun 2020 oleh sekelompok penulis horror yang memiliki visi untuk menciptakan platform yang khusus menyajikan novel-novel horror berkualitas tinggi.</p>
+       <p class="text-gray-300 mb-4">Kami percaya bahwa cerita horror bukan hanya tentang ketakutan, tetapi juga tentang eksplorasi sisi gelap dari pikiran manusia, tentang menghadapi ketakutan terdalam, dan tentang menemukan keberanian di tengah kegelapan.</p>
+       <p class="text-gray-300">Setiap novel di platform kami dipilih dengan hati-hati untuk memberikan pengalaman membaca yang mendebarkan, menegangkan, dan tak terlupakan bagi para pembaca kami.</p>
       </div>
-      <div class="hidden md:block">
-       <div class="w-full h-40 bg-gradient-to-r from-red-900/30 to-transparent rounded-lg"></div>
+      <div class="relative">
+       <img src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg" alt="Enigma founding team" class="rounded-lg shadow-2xl w-full h-auto filter grayscale hover:grayscale-0 transition-all duration-700">
+       <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
       </div>
      </div>
     </div>
    </section>
    
-   <!-- Our host section -->
-   <section class="w-full py-12 bg-black/30">
+   <!-- Stats section -->
+   <section class="py-16 bg-gray-900">
     <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
-     <h2 class="text-white text-xl font-bold mb-6">Our host</h2>
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-      <div>
-       <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-        Hello! I'm Andy, a passionate storyteller and the creative mind behind the thrilling mysteries and suspense-filled tales. We're committed to those curious souls in search of enigmatic tales!
-       </p>
-       <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-        My love for unraveling complex narratives and diving into the unknown began at a young age. For me, there's nothing quite like the readers at the edge of their seats. Every plot twist and every clue is carefully crafted to challenge the mind and stir curiosity.
-       </p>
-       <p class="text-gray-300 text-sm leading-relaxed">
-        My goal is to carefully curate stories to challenge the mind and stir the soul.
-       </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="stats-counter">
+       <div class="counter-value">500+</div>
+       <div class="counter-label">Novel Horror</div>
       </div>
-      <div class="flex justify-center md:justify-end">
-       <div class="w-60 h-60 relative hover-effect">
-        <div class="absolute inset-0 bg-red-600 rounded-lg transform translate-x-2 translate-y-2"></div>
-        <img alt="Host with glasses" class="w-full h-full object-cover rounded-lg relative z-10" src="https://storage.googleapis.com/a1aa/image/275128ce-56c1-42fe-47f9-909d95cdc4ec.jpg"/>
+      <div class="stats-counter">
+       <div class="counter-value">100K+</div>
+       <div class="counter-label">Pembaca Aktif</div>
+      </div>
+      <div class="stats-counter">
+       <div class="counter-value">50+</div>
+       <div class="counter-label">Penulis Berbakat</div>
+      </div>
+      <div class="stats-counter">
+       <div class="counter-value">20+</div>
+       <div class="counter-label">Penghargaan</div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- Our Team section -->
+   <section class="py-16 netflix-container">
+    <div class="max-w-screen-lg mx-auto">
+     <h2 class="text-3xl font-bold text-white mb-8 horror-text">Tim Kami</h2>
+     
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Team Member 1 -->
+      <div class="team-card">
+       <div class="team-thumbnail">
+        <img src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sarah Johnson">
        </div>
-      </div>
-     </div>
-    </div>
-   </section>
-   
-   <!-- Quotes section -->
-   <section class="w-full py-12 bg-black">
-    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
-     <div class="grid grid-cols-1 gap-10">
-      <div class="quote text-gray-300 text-sm mb-8 pl-8">
-       <p class="mb-4 leading-relaxed">
-        "The inspiration for Mystery Echoes stems from a chilling personal experience that left an indelible mark during my investigative journalism days. I found myself alone in an abandoned mansion, with the darkness seeming to delve deeper into uncharted mysteries. My goal is to share these compelling stories with a broader audience, and that's how this podcast was born."
-       </p>
+       <div class="team-info">
+        <span class="team-role">FOUNDER</span>
+        <h3 class="text-white text-lg font-semibold mb-1">Sarah Johnson</h3>
+        <p class="text-gray-400 text-sm mb-3">Penulis horror terkenal dengan lebih dari 15 novel bestseller. Pendiri Enigma dengan visi untuk membawa cerita horror ke level berikutnya.</p>
+        <div class="flex space-x-3">
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-linkedin-in"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-instagram"></i>
+         </a>
+        </div>
+       </div>
       </div>
       
-      <div class="flex justify-center mb-8">
-       <div class="relative hover-effect">
-        <img alt="Ghost logo" class="w-32 h-32 object-contain" src="https://png.pngtree.com/png-clipart/20230810/original/pngtree-halloween-ghost-cartoon-scary-expression-sickle-picture-image_8534927.png"/>
-        <div class="absolute -bottom-4 -right-16 transform rotate-12 text-red-600 text-5xl font-bold">BOO!</div>
+      <!-- Team Member 2 -->
+      <div class="team-card">
+       <div class="team-thumbnail">
+        <img src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Michael Chen">
+       </div>
+       <div class="team-info">
+        <span class="team-role">CREATIVE DIRECTOR</span>
+        <h3 class="text-white text-lg font-semibold mb-1">Michael Chen</h3>
+        <p class="text-gray-400 text-sm mb-3">Mantan editor senior di penerbit horror terkemuka. Memiliki mata yang tajam untuk cerita horror yang menarik dan mendebarkan.</p>
+        <div class="flex space-x-3">
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-linkedin-in"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-instagram"></i>
+         </a>
+        </div>
        </div>
       </div>
       
-      <div class="quote text-gray-300 text-sm mb-4 pl-8">
-       <p class="leading-relaxed">
-        "I believe in the power of storytelling to connect people and create a community of mystery enthusiasts. I actively engage with listeners on social media, encouraging you to share your stories and theories. This interactive approach ensures our content is ever-evolving, fresh, and builds a loyal, enthusiastic listener base."
-       </p>
+      <!-- Team Member 3 -->
+      <div class="team-card">
+       <div class="team-thumbnail">
+        <img src="https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Elena Rodriguez">
+       </div>
+       <div class="team-info">
+        <span class="team-role">HEAD OF CONTENT</span>
+        <h3 class="text-white text-lg font-semibold mb-1">Elena Rodriguez</h3>
+        <p class="text-gray-400 text-sm mb-3">Penulis dan peneliti fenomena paranormal. Membawa pengalaman nyata ke dalam dunia fiksi horror Enigma.</p>
+        <div class="flex space-x-3">
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-linkedin-in"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-instagram"></i>
+         </a>
+        </div>
+       </div>
+      </div>
+      
+      <!-- Team Member 4 -->
+      <div class="team-card">
+       <div class="team-thumbnail">
+        <img src="https://storage.googleapis.com/a1aa/image/122d60ed-b5e3-4cd4-f819-bc53c262dfc1.jpg" alt="David Kim">
+       </div>
+       <div class="team-info">
+        <span class="team-role">TECH LEAD</span>
+        <h3 class="text-white text-lg font-semibold mb-1">David Kim</h3>
+        <p class="text-gray-400 text-sm mb-3">Ahli teknologi dengan passion untuk horror. Memastikan platform Enigma memberikan pengalaman membaca yang optimal.</p>
+        <div class="flex space-x-3">
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-twitter"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-linkedin-in"></i>
+         </a>
+         <a href="#" class="text-gray-400 hover:text-red-700 transition-colors duration-300">
+          <i class="fab fa-instagram"></i>
+         </a>
+        </div>
+       </div>
       </div>
      </div>
     </div>
    </section>
    
-   <!-- Our Mission section -->
-   <section class="w-full py-12 bg-gradient-to-b from-black/50 to-transparent">
-    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
-     <h2 class="text-white text-xl font-bold mb-6">Our Mission</h2>
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div>
-       <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-        At Enigma, our mission is to craft stories and experiences that provide listeners with the imagination and immerse our audience in the thrilling world of mystery and intrigue. Our stories are designed to be more than just entertainment; they are journeys into the human experience, and through our stories, we aim to challenge minds and captivate hearts.
-       </p>
-       <p class="text-gray-300 text-sm leading-relaxed">
-        We are dedicated to creating intricate narratives filled with unpredictable twists, complex characters, and unforgettable puzzles. Whether through books, interactive experiences, or immersive storytelling, every story is an opportunity to explore, solve, and engage with the unknown.
-       </p>
+   <!-- Our Journey section -->
+   <section class="py-16 netflix-container">
+    <div class="max-w-screen-lg mx-auto">
+     <h2 class="text-3xl font-bold text-white mb-12 text-center horror-text">Perjalanan Kami</h2>
+     
+     <div class="timeline">
+      <!-- Timeline item 1 -->
+      <div class="timeline-container left">
+       <div class="timeline-content">
+        <span class="timeline-year">2020</span>
+        <h3 class="text-white text-lg font-semibold mb-2">Awal Mula</h3>
+        <p class="text-gray-400 text-sm">Enigma didirikan oleh Sarah Johnson dengan visi untuk menciptakan platform novel horror terbaik.</p>
+       </div>
       </div>
-      <div class="flex justify-center md:justify-end">
-       <div class="w-60 h-60 relative hover-effect">
-        <div class="absolute inset-0 bg-red-600/30 rounded-full transform -translate-x-2 -translate-y-2"></div>
-        <img alt="Ghost cartoon character" class="w-full h-full object-contain relative z-10" src="https://png.pngtree.com/png-clipart/20230810/original/pngtree-halloween-ghost-cartoon-scary-expression-sickle-picture-image_8534927.png"/>
+      
+      <!-- Timeline item 2 -->
+      <div class="timeline-container right">
+       <div class="timeline-content">
+        <span class="timeline-year">2021</span>
+        <h3 class="text-white text-lg font-semibold mb-2">Pertumbuhan Pesat</h3>
+        <p class="text-gray-400 text-sm">Mencapai 50,000 pembaca aktif dan menambahkan 200+ novel horror ke platform.</p>
+       </div>
+      </div>
+      
+      <!-- Timeline item 3 -->
+      <div class="timeline-container left">
+       <div class="timeline-content">
+        <span class="timeline-year">2022</span>
+        <h3 class="text-white text-lg font-semibold mb-2">Penghargaan Pertama</h3>
+        <p class="text-gray-400 text-sm">Memenangkan penghargaan "Best Horror Platform" dan "Innovation in Digital Reading".</p>
+       </div>
+      </div>
+      
+      <!-- Timeline item 4 -->
+      <div class="timeline-container right">
+       <div class="timeline-content">
+        <span class="timeline-year">2023</span>
+        <h3 class="text-white text-lg font-semibold mb-2">Ekspansi Global</h3>
+        <p class="text-gray-400 text-sm">Memperluas jangkauan ke pasar internasional dan menambahkan fitur-fitur baru yang inovatif.</p>
        </div>
       </div>
      </div>
     </div>
    </section>
-  </main>
+   
+   <!-- Testimonials section -->
+   <section class="py-16 bg-gray-900">
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10">
+     <h2 class="text-3xl font-bold text-white mb-8 text-center horror-text">Apa Kata Pembaca Kami</h2>
+     
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card">
+       <div class="testimonial-quote">
+        <p class="text-gray-300 text-sm">"Enigma telah mengubah cara saya menikmati novel horror. Cerita-ceritanya begitu menarik dan mendebarkan, saya tidak bisa berhenti membaca!"</p>
+       </div>
+       <div class="testimonial-author">
+        <div class="testimonial-avatar">
+         <img src="https://storage.googleapis.com/a1aa/image/1551ddb0-bcf5-4ca2-575a-e4125c52ded0.jpg" alt="Andi Pratama">
+        </div>
+        <div>
+         <h4 class="text-white text-sm font-semibold">Andi Pratama</h4>
+         <p class="text-gray-400 text-xs">Pembaca Setia</p>
+        </div>
+       </div>
+      </div>
+      
+       <!-- Testimonial 2 -->
+       <div class="testimonial-card">
+        <div class="testimonial-quote">
+         <p class="text-gray-300 text-sm">Sebagai penulis horror, saya sangat menghargai platform yang berdedikasi untuk genre ini. Enigma adalah rumah yang sempurna untuk karya-karya saya.</p>
+        </div>
+        <div class="testimonial-author">
+         <div class="testimonial-avatar">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Budi Santoso">
+         </div>
+         <div>
+          <h4 class="text-white text-sm font-semibold">Budi Santoso</h4>
+          <p class="text-gray-400 text-xs">Penulis Horror</p>
+         </div>
+        </div>
+       </div>
+       
+       <!-- Testimonial 3 -->
+       <div class="testimonial-card">
+        <div class="testimonial-quote">
+         <p class="text-gray-300 text-sm">Kualitas novel di Enigma jauh di atas platform lain. Setiap cerita dipilih dengan hati-hati dan memberikan pengalaman horror yang autentik.</p>
+        </div>
+        <div class="testimonial-author">
+         <div class="testimonial-avatar">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dewi Lestari">
+         </div>
+         <div>
+          <h4 class="text-white text-sm font-semibold">Dewi Lestari</h4>
+          <p class="text-gray-400 text-xs">Kritikus Sastra</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+  
+    
+    <!-- CTA section -->
+    <section class="py-16 bg-gradient-to-r from-red-900/30 to-black">
+     <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4 horror-text">Bergabunglah dengan Komunitas Horror Kami</h2>
+      <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Dapatkan akses ke ratusan novel horror terbaik dan jadilah bagian dari komunitas pecinta horror terbesar di Indonesia.</p>
+      <a href="#" class="inline-block bg-red-700 text-white px-8 py-3 rounded-md font-semibold hover:bg-red-800 transition-colors duration-300 transform hover:scale-105">Mulai Membaca Sekarang</a>
+     </div>
+    </section>
+   </main>
+   
   
   <!-- Footer -->
   <footer class="bg-black text-gray-400 text-xs py-8 mt-auto">
-   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:justify-between md:items-start space-y-8 md:space-y-0">
-    <div class="flex flex-col md:flex-row md:space-x-12">
-     <div class="mb-6 md:mb-0 flex items-center space-x-2">
-      <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
-       <g>
-           <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
-           <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
-       </g>
-      </svg>
-      <span class="text-white font-semibold text-sm select-none">
-       Enigma
-      </span>
-     </div>
-     <div class="flex space-x-12">
-      <div>
-       <h4 class="font-semibold mb-2 text-white select-none">
-        Quick links
-       </h4>
-       <ul class="space-y-1">
-        <li>
-         <a class="hover:text-red-700 transition-colors duration-300" href="index.html">
-          Home
-         </a>
-        </li>
-        <li>
-         <a class="hover:text-red-700 transition-colors duration-300" href="#">
-          About
-         </a>
-        </li>
-        <li>
-         <a class="hover:text-red-700 transition-colors duration-300" href="episode.html">
-          Episodes
-         </a>
-        </li>
-        <li>
-         <a class="hover:text-red-700 transition-colors duration-300" href="contact.html">
-          Contact us
-         </a>
-        </li>
-       </ul>
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+     <!-- Logo and brand -->
+     <div>
+      <div class="flex items-center space-x-2 mb-4">
+       <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 32.756 160 134.488" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="20 32.756 160 134.488" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs><style>#comp-m4l5l3x72 svg [data-color="1"] {fill: #D22117;}</style></defs>
+        <g>
+            <path d="M91.23 57.271H180v109.973H47.671V99.118H91.23V57.271z" fill="#D22117" data-color="1"></path>
+            <path d="M63.571 32.756v41.847H20V32.756h43.571z" fill="#D22117" data-color="1"></path>
+        </g>
+       </svg>
+       <span class="text-white font-semibold text-sm select-none">
+        Enigma
+       </span>
       </div>
-      <div>
-       <h4 class="font-semibold mb-2 text-white select-none">
-        Contacts
-       </h4>
-       <p>
-        enigmapodcast@gmail.com
-       </p>
-       <p>
-        0822334468
-       </p>
-       <div class="flex space-x-4 mt-2 text-lg">
-        <a aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300" href="#">
-         <i class="fab fa-instagram"></i>
-        </a>
-        <a aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300" href="#">
-         <i class="fab fa-facebook-f"></i>
-        </a>
-        <a aria-label="X" class="hover:text-red-700 transition-colors duration-300" href="#">
-         <i class="fab fa-x-twitter"></i>
-        </a>
-        <a aria-label="YouTube" class="hover:text-red-700 transition-colors duration-300" href="#">
-         <i class="fab fa-youtube"></i>
-        </a>
-       </div>
+     </div>
+     
+     <!-- Quick links -->
+     <div>
+      <h4 class="text-white font-semibold mb-4">Quick links</h4>
+      <ul class="space-y-2">
+       <li><a href="index.html" class="hover:text-red-700 transition-colors duration-300">Home</a></li>
+       <li><a href="about.html" class="hover:text-red-700 transition-colors duration-300">About</a></li>
+       <li><a href="episode.html" class="hover:text-red-700 transition-colors duration-300">Episodes</a></li>
+       <li><a href="#" class="text-red-700 transition-colors duration-300">Contact us</a></li>
+      </ul>
+     </div>
+     
+     <!-- Contacts -->
+     <div>
+      <h4 class="text-white font-semibold mb-4">Contacts</h4>
+      <p class="mb-2">ardianskennedy@gmail.com</p>
+      <p class="mb-4">081122334456</p>
+      <div class="flex space-x-4">
+       <a href="#" aria-label="Reddit" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-reddit-alien"></i>
+       </a>
+       <a href="#" aria-label="Twitter" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-twitter"></i>
+       </a>
+       <a href="#" aria-label="Facebook" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-facebook-f"></i>
+       </a>
+       <a href="#" aria-label="Instagram" class="hover:text-red-700 transition-colors duration-300">
+        <i class="fab fa-instagram"></i>
+       </a>
       </div>
      </div>
     </div>
-    <div class="w-full max-w-xs">
-     <h4 class="font-semibold mb-2 text-white select-none">
-      Subscribe to our newsletter
-     </h4>
-     <form class="flex flex-col space-y-2">
-      <input class="bg-black border border-gray-700 rounded px-2 py-1 text-white focus:outline-none focus:border-red-700 text-xs" placeholder="Email *" type="email"/>
-      <button class="bg-black border border-gray-700 text-gray-300 text-xs py-1 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300" type="submit">
-       Submit
-      </button>
-     </form>
+    
+    <!-- Newsletter -->
+    <div class="max-w-screen-lg mx-auto px-6 md:px-8 lg:px-10 mt-8">
+     <h4 class="text-white font-semibold mb-4">Subscribe to our newsletter</h4>
+     <div class="flex flex-col md:flex-row gap-4 max-w-md">
+      <input type="email" placeholder="Email *" class="bg-black border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-red-700 flex-grow">
+      <button type="submit" class="bg-black border border-gray-700 text-gray-300 px-4 py-2 rounded hover:border-red-700 hover:text-red-700 transition-colors duration-300 md:w-auto w-full">Submit</button>
+     </div>
     </div>
-   </div>
-   <div class="text-center text-gray-600 text-[10px] mt-8 select-none">
-    © 2024 by Mystery Echoes. Made with
-    <span class="text-red-700">
-     ♥
-    </span>
-    using Tailwind CSS
-   </div>
-  </footer>
+    
+    <!-- Copyright -->
+    <div class="text-center text-gray-600 text-[10px] mt-8">
+     © 2024 by Mystery Echoes. Made with <span class="text-red-700">♥</span> using Wix Studio™
+    </div>
+   </footer>
+  </body>
+ </html>
+   
+   <script>
+    // Animasi untuk counter
+    const counters = document.querySelectorAll('.counter-value');
+    
+    counters.forEach(counter => {
+      const target = parseInt(counter.innerText);
+      const suffix = counter.innerText.match(/[^\d]+$/);
+      
+      counter.innerText = '0';
+      
+      const updateCounter = () => {
+        const count = parseInt(counter.innerText);
+        const increment = target / 100;
+        
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment) + (suffix ? suffix[0] : '');
+          setTimeout(updateCounter, 20);
+        } else {
+          counter.innerText = target + (suffix ? suffix[0] : '');
+        }
+      };
+      
+      // Mulai animasi saat elemen terlihat
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            updateCounter();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(counter);
+    });
+   </script>
  </body>
 </html>
